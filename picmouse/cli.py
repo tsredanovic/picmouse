@@ -1,4 +1,7 @@
 import click
+from PIL import Image
+
+from utils import draw
 
 
 @click.group()
@@ -44,6 +47,14 @@ def cli():
     "--invert", is_flag=True, show_default=True, default=False, help="Invert image."
 )
 def convert(in_path, out_path, width, height, resample, resolution, threshold, invert):
+    resample_map = {
+        "nearest": Image.Resampling.NEAREST,
+        "box": Image.Resampling.BOX,
+        "bilinear": Image.Resampling.BILINEAR,
+        "hamming": Image.Resampling.HAMMING,
+        "bicubic": Image.Resampling.BICUBIC,
+    }
+    resample = resample_map[resample]
     click.echo(f"in_path: {in_path}")
     click.echo(f"out_path: {out_path}")
     click.echo(f"width: {width}")
@@ -52,6 +63,8 @@ def convert(in_path, out_path, width, height, resample, resolution, threshold, i
     click.echo(f"resolution: {resolution}")
     click.echo(f"threshold: {threshold}")
     click.echo(f"invert: {invert}")
+
+    draw(in_path, out_path, width, height, resolution, threshold, resample, invert)
 
 
 if __name__ == "__main__":
