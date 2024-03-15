@@ -28,10 +28,22 @@ def cli():
     default="nearest",
     help="Resampling used when resizing image. Only used if width and/or height is provided. Defaults to nearest.",
 )
-@click.option("--resolution", type=click.IntRange(min=0, max=100), default=100, help="Output image resolution. Defaults to 100.")
-@click.option("--threshold", type=click.IntRange(min=0, max=255), default=125, help="Threshold used when converting to monochrome. Defaults to 125.")
-@click.option("--invert", is_flag=True, show_default=True, default=False, help="Invert image.")
-def convert(in_path, out_path,width, height, resample, resolution, threshold, invert):
+@click.option(
+    "--resolution",
+    type=click.IntRange(min=0, max=100),
+    default=100,
+    help="Output image resolution. Defaults to 100.",
+)
+@click.option(
+    "--threshold",
+    type=click.IntRange(min=0, max=255),
+    default=125,
+    help="Threshold used when converting to monochrome. Defaults to 125.",
+)
+@click.option(
+    "--invert", is_flag=True, show_default=True, default=False, help="Invert image."
+)
+def convert(in_path, out_path, width, height, resample, resolution, threshold, invert):
     click.echo(f"in_path: {in_path}")
     click.echo(f"out_path: {out_path}")
     click.echo(f"width: {width}")
