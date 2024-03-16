@@ -1,3 +1,4 @@
+from time import sleep
 import click
 import pyautogui
 from PIL import Image
@@ -74,6 +75,18 @@ def mouse_to_pos_command(pos):
     click.echo(f"pos: {pos}")
     x, y = pos
     pyautogui.moveTo(x, y)
+
+@cli.command(name='mouse-start-to-finish')
+@click.option("--start", nargs=2, type=click.INT, required=True, help="Moves mouse from this position.")
+@click.option("--finish", nargs=2, type=click.INT, required=True, help="Moves mouse to this position.")
+@click.option("--seconds", type=click.INT, default=3, help="Time for movement and waiting between movements.")
+def mouse_to_pos_command(start, finish, seconds):
+    click.echo(f"start: {start}")
+    click.echo(f"finish: {finish}")
+    click.echo(f"seconds: {seconds}")
+    pyautogui.moveTo(start[0], start[1], seconds)
+    sleep(seconds)
+    pyautogui.moveTo(finish[0], finish[1], seconds)
 
 if __name__ == "__main__":
     cli()
