@@ -10,7 +10,7 @@ def cli():
     pass
 
 
-@cli.command()
+@cli.command(name='convert')
 @click.option("--in-path", type=click.Path(), required=True, help="Input image path.")
 @click.option("--out-path", type=click.Path(), required=True, help="Output image path.")
 @click.option(
@@ -47,7 +47,7 @@ def cli():
 @click.option(
     "--invert", is_flag=True, show_default=True, default=False, help="Invert image."
 )
-def convert(in_path, out_path, width, height, resample, resolution, threshold, invert):
+def convert_command(in_path, out_path, width, height, resample, resolution, threshold, invert):
     resample_map = {
         "nearest": Image.Resampling.NEAREST,
         "box": Image.Resampling.BOX,
@@ -68,9 +68,10 @@ def convert(in_path, out_path, width, height, resample, resolution, threshold, i
     convert(in_path, out_path, width, height, resolution, threshold, resample, invert)
 
 
-@cli.command()
+@cli.command(name='mouse-to-pos')
 @click.option("--pos", nargs=2, type=click.INT, required=True, help="Moves mouse to this position.")
-def mouse_to_pos(pos):
+def mouse_to_pos_command(pos):
+    click.echo(f"pos: {pos}")
     x, y = pos
     pyautogui.moveTo(x, y)
 
