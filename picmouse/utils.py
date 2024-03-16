@@ -29,7 +29,7 @@ def apply_threshold(img, threshold):
 def invert(img):
     return ImageOps.invert(img)
 
-def draw(in_path, out_path, width=None, height=None, resolution=None, threshold=None, resample=None, invert=False):
+def convert(in_path, out_path, width=None, height=None, resolution=None, threshold=None, resample=None, invert=False):
     # Load image
     img = load_image(in_path)
 

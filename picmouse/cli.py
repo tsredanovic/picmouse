@@ -1,7 +1,8 @@
 import click
+import pyautogui
 from PIL import Image
 
-from utils import draw
+from utils import convert
 
 
 @click.group()
@@ -64,8 +65,14 @@ def convert(in_path, out_path, width, height, resample, resolution, threshold, i
     click.echo(f"threshold: {threshold}")
     click.echo(f"invert: {invert}")
 
-    draw(in_path, out_path, width, height, resolution, threshold, resample, invert)
+    convert(in_path, out_path, width, height, resolution, threshold, resample, invert)
 
+
+@cli.command()
+@click.option("--pos", nargs=2, type=click.INT, required=True, help="Moves mouse to this position.")
+def mouse_to_pos(pos):
+    x, y = pos
+    pyautogui.moveTo(x, y)
 
 if __name__ == "__main__":
     cli()
