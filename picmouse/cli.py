@@ -3,7 +3,7 @@ import click
 import pyautogui
 from PIL import Image
 
-from utils import load_image, save_image, convert
+from utils import load_image, save_image, convert, draw
 
 # SHARED COMMAND OPTIONS
 
@@ -129,8 +129,7 @@ def draw_command(pos, in_path, width, height, resample, resolution, threshold, i
 
     img = load_image(in_path)
     img = convert(img, width, height, resolution, threshold, resample, invert)
-
-    pyautogui.moveTo(pos[0], pos[1])
+    draw(pos, img)
 
 
 # Move mouse to possition command

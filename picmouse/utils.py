@@ -1,4 +1,5 @@
 from PIL import Image, ImageOps
+import pyautogui
 
 
 def load_image(path):
@@ -62,13 +63,16 @@ def convert(
 
 
 def draw(
-    in_path,
     pos,
-    width=None,
-    height=None,
-    resolution=None,
-    threshold=None,
-    resample=None,
-    invert=False,
+    img,
 ):
-    pass
+    current_row = 0
+    for i, pixel in enumerate(img.getdata(), 1):
+        if pixel > 127:
+            current_col = (i - 1) % img.width
+            pyautogui.click(pos[0] + current_col, pos[1] + current_row)
+            print(f"Clicked at {pos[0] + current_col}, {pos[1] + current_row}")
+            
+        if i != 0 and i % img.width == 0:
+            current_row += 1
+
